@@ -1,170 +1,42 @@
 -- --------------------------------------------------------------------------------------
 -- Pocket Portal
 -- --------------------------------------------------------------------------------------
-SET 
+SET
 @ITEMENTRY 			:= 701002,
 @NAME				:= "Pocket Portal",
-@ENTRY 				:= 128,
 @QUALITY			:= 7,
 @FLAGS				:= 134217728, -- BOA
 @FLAGSEXTRA			:= 0,
 @SCALE				:= 0.8,
-@SOURCETYPE 		        := 0,
+@SOURCETYPE 		:= 0,
 @COOLDOWN			:= 30000,
-@TEXT_ID        	        := 300000,
-@GOSSIP_MENU    	        := 50000,
-@SCRIPTNAME			:= "pocket_portal"; -- internalitemhanler
+@SPELL              := 11541,
+@SCRIPTNAME         := 'pocket_portal';
+
 -- --------------------------------------------------------------------------------------
 -- Teleporter Item
 -- --------------------------------------------------------------------------------------
 DELETE FROM `item_template` WHERE (`entry`= @ITEMENTRY);
-INSERT INTO `item_template` (`entry`, `class`, `subclass`, `name`, `displayid`, `Quality`, `Flags`, `FlagsExtra`, `BuyCount`, `BuyPrice`, `SellPrice`, `InventoryType`, `AllowableClass`, `AllowableRace`, `ItemLevel`, `RequiredLevel`, `RequiredSkill`, `RequiredSkillRank`, `requiredspell`, `requiredhonorrank`, `RequiredCityRank`, `RequiredReputationFaction`, `RequiredReputationRank`, `maxcount`, `stackable`, `ContainerSlots`, `StatsCount`, `stat_type1`, `stat_value1`, `stat_type2`, `stat_value2`, `stat_type3`, `stat_value3`, `stat_type4`, `stat_value4`, `stat_type5`, `stat_value5`, `stat_type6`, `stat_value6`, `stat_type7`, `stat_value7`, `stat_type8`, `stat_value8`, `stat_type9`, `stat_value9`, `stat_type10`, `stat_value10`, `ScalingStatDistribution`, `ScalingStatValue`, `dmg_min1`, `dmg_max1`, `dmg_type1`, `dmg_min2`, `dmg_max2`, `dmg_type2`, `armor`, `holy_res`, `fire_res`, `nature_res`, `frost_res`, `shadow_res`, `arcane_res`, `delay`, `ammo_type`, `RangedModRange`, `spellid_1`, `spelltrigger_1`, `spellcharges_1`, `spellppmRate_1`, `spellcooldown_1`, `spellcategory_1`, `spellcategorycooldown_1`, `spellid_2`, `spelltrigger_2`, `spellcharges_2`, `spellppmRate_2`, `spellcooldown_2`, `spellcategory_2`, `spellcategorycooldown_2`, `spellid_3`, `spelltrigger_3`, `spellcharges_3`, `spellppmRate_3`, `spellcooldown_3`, `spellcategory_3`, `spellcategorycooldown_3`, `spellid_4`, `spelltrigger_4`, `spellcharges_4`, `spellppmRate_4`, `spellcooldown_4`, `spellcategory_4`, `spellcategorycooldown_4`, `spellid_5`, `spelltrigger_5`, `spellcharges_5`, `spellppmRate_5`, `spellcooldown_5`, `spellcategory_5`, `spellcategorycooldown_5`, `bonding`, `description`, `PageText`, `LanguageID`, `PageMaterial`, `startquest`, `lockid`, `Material`, `sheath`, `RandomProperty`, `RandomSuffix`, `block`, `itemset`, `MaxDurability`, `area`, `Map`, `BagFamily`, `TotemCategory`, `socketColor_1`, `socketContent_1`, `socketColor_2`, `socketContent_2`, `socketColor_3`, `socketContent_3`, `socketBonus`, `GemProperties`, `RequiredDisenchantSkill`, `ArmorDamageModifier`, `Duration`, `ItemLimitCategory`, `HolidayId`, `ScriptName`, `DisenchantID`, `FoodType`, `minMoneyLoot`, `maxMoneyLoot`, `VerifiedBuild`) 
+INSERT INTO `item_template` (`entry`, `class`, `subclass`, `name`, `displayid`, `Quality`, `Flags`, `FlagsExtra`, `BuyCount`, `BuyPrice`, `SellPrice`, `InventoryType`, `AllowableClass`, `AllowableRace`, `ItemLevel`, `RequiredLevel`, `RequiredSkill`, `RequiredSkillRank`, `requiredspell`, `requiredhonorrank`, `RequiredCityRank`, `RequiredReputationFaction`, `RequiredReputationRank`, `maxcount`, `stackable`, `ContainerSlots`, `StatsCount`, `stat_type1`, `stat_value1`, `stat_type2`, `stat_value2`, `stat_type3`, `stat_value3`, `stat_type4`, `stat_value4`, `stat_type5`, `stat_value5`, `stat_type6`, `stat_value6`, `stat_type7`, `stat_value7`, `stat_type8`, `stat_value8`, `stat_type9`, `stat_value9`, `stat_type10`, `stat_value10`, `ScalingStatDistribution`, `ScalingStatValue`, `dmg_min1`, `dmg_max1`, `dmg_type1`, `dmg_min2`, `dmg_max2`, `dmg_type2`, `armor`, `holy_res`, `fire_res`, `nature_res`, `frost_res`, `shadow_res`, `arcane_res`, `delay`, `ammo_type`, `RangedModRange`, `spellid_1`, `spelltrigger_1`, `spellcharges_1`, `spellppmRate_1`, `spellcooldown_1`, `spellcategory_1`, `spellcategorycooldown_1`, `spellid_2`, `spelltrigger_2`, `spellcharges_2`, `spellppmRate_2`, `spellcooldown_2`, `spellcategory_2`, `spellcategorycooldown_2`, `spellid_3`, `spelltrigger_3`, `spellcharges_3`, `spellppmRate_3`, `spellcooldown_3`, `spellcategory_3`, `spellcategorycooldown_3`, `spellid_4`, `spelltrigger_4`, `spellcharges_4`, `spellppmRate_4`, `spellcooldown_4`, `spellcategory_4`, `spellcategorycooldown_4`, `spellid_5`, `spelltrigger_5`, `spellcharges_5`, `spellppmRate_5`, `spellcooldown_5`, `spellcategory_5`, `spellcategorycooldown_5`, `bonding`, `description`, `PageText`, `LanguageID`, `PageMaterial`, `startquest`, `lockid`, `Material`, `sheath`, `RandomProperty`, `RandomSuffix`, `block`, `itemset`, `MaxDurability`, `area`, `Map`, `BagFamily`, `TotemCategory`, `socketColor_1`, `socketContent_1`, `socketColor_2`, `socketContent_2`, `socketColor_3`, `socketContent_3`, `socketBonus`, `GemProperties`, `RequiredDisenchantSkill`, `ArmorDamageModifier`, `Duration`, `ItemLimitCategory`, `HolidayId`, `ScriptName`, `DisenchantID`, `FoodType`, `minMoneyLoot`, `maxMoneyLoot`, `VerifiedBuild`)
 VALUES (@ITEMENTRY, 0, 0, @NAME, 28862, @QUALITY, @FLAGS, @FLAGSEXTRA, 1, 20000, 10000, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 54406, 0, 0, 0, @COOLDOWN, 1193, 60000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, @SCRIPTNAME, 0, 0, 0, 0, 12340);
 
--- Easy View
-UPDATE `item_template`
-SET 
- `entry` = '701002',
- `class` = '0',
- `subclass` = '0',
- `SoundOverrideSubclass` = '-1',
- `name` = 'Pocket Portal',
- `displayid` = '30076', -- 30076 (Jeeves), 27320 (Goblin Mechanic), 21572 (Elven Portal Master)
- `Quality` = '7', -- BOA
- `Flags` = '134217728', -- BOA
- `FlagsExtra` = '0',
- `BuyCount` = '1',
- `BuyPrice` = '0',
- `SellPrice` = '0',
- `InventoryType` = '0',
- `AllowableClass` = '-1',
- `AllowableRace` = '-1',
- `ItemLevel` = '277',
- `RequiredLevel` = '0',
- `RequiredSkill` = '0',
- `RequiredSkillRank` = '0',
- `requiredspell` = '0',
- `requiredhonorrank` = '0',
- `RequiredCityRank` = '0',
- `RequiredReputationFaction` = '0',
- `RequiredReputationRank` = '0',
- `maxcount` = '0',
- `stackable` = '1',
- `ContainerSlots` = '0',
- `StatsCount` = '0',
- `stat_type1` = '0',
- `stat_value1` = '0',
- `stat_type2` = '0',
- `stat_value2` = '0',
- `stat_type3` = '0',
- `stat_value3` = '0',
- `stat_type4` = '0',
- `stat_value4` = '0',
- `stat_type5` = '0',
- `stat_value5` = '0',
- `stat_type6` = '0',
- `stat_value6` = '0',
- `stat_type7` = '0',
- `stat_value7` = '0',
- `stat_type8` = '0',
- `stat_value8` = '0',
- `stat_type9` = '0',
- `stat_value9` = '0',
- `stat_type10` = '0',
- `stat_value10` = '0',
- `ScalingStatDistribution` = '0',
- `ScalingStatValue` = '0',
- `dmg_min1` = '0',
- `dmg_max1` = '0',
- `dmg_type1` = '0',
- `dmg_min2` = '0',
- `dmg_max2` = '0',
- `dmg_type2` = '0',
- `armor` = '0',
- `holy_res` = '0',
- `fire_res` = '0',
- `nature_res` = '0',
- `frost_res` = '0',
- `shadow_res` = '0',
- `arcane_res` = '0',
- `delay` = '0',
- `ammo_type` = '0',
- `RangedModRange` = '0',
- `spellid_1` = '54406',
- `spelltrigger_1` = '0',
- `spellcharges_1` = '0',
- `spellppmRate_1` = '0',
- `spellcooldown_1` = '30000',
- `spellcategory_1` = '1193',
- `spellcategorycooldown_1` = '60000',
- `spellid_2` = '0',
- `spelltrigger_2` = '0',
- `spellcharges_2` = '0',
- `spellppmRate_2` = '0',
- `spellcooldown_2` = '0',
- `spellcategory_2` = '0',
- `spellcategorycooldown_2` = '0',
- `spellid_3` = '0',
- `spelltrigger_3` = '0',
- `spellcharges_3` = '0',
- `spellppmRate_3` = '0',
- `spellcooldown_3` = '0',
- `spellcategory_3` = '0',
- `spellcategorycooldown_3` = '0',
- `spellid_4` = '0',
- `spelltrigger_4` = '0',
- `spellcharges_4` = '0',
- `spellppmRate_4` = '0',
- `spellcooldown_4` = '0',
- `spellcategory_4` = '0',
- `spellcategorycooldown_4` = '0',
- `spellid_5` = '0',
- `spelltrigger_5` = '0',
- `spellcharges_5` = '0',
- `spellppmRate_5` = '0',
- `spellcooldown_5` = '0',
- `spellcategory_5` = '0',
- `spellcategorycooldown_5` = '0',
- `bonding` = '1',
- `description` = 'Peering into this rune you can see what appear to be mountains and oceans swirling together.',
- `PageText` = '0',
- `LanguageID` = '0',
- `PageMaterial` = '0',
- `startquest` = '0',
- `lockid` = '0',
- `Material` = '-1',
- `sheath` = '0',
- `RandomProperty` = '0',
- `RandomSuffix` = '0',
- `block` = '0',
- `itemset` = '0',
- `MaxDurability` = '0',
- `area` = '0',
- `Map` = '0',
- `BagFamily` = '0',
- `TotemCategory` = '0',
- `socketColor_1` = '0',
- `socketContent_1` = '0',
- `socketColor_2` = '0',
- `socketContent_2` = '0',
- `socketColor_3` = '0',
- `socketContent_3` = '0',
- `socketBonus` = '0',
- `GemProperties` = '0',
- `RequiredDisenchantSkill` = '0',
- `ArmorDamageModifier` = '0',
- `duration` = '0',
- `ItemLimitCategory` = '0',
- `HolidayId` = '0',
- `ScriptName` = 'pocket_portal',
- `DisenchantID` = '0',
- `FoodType` = '0',
- `minMoneyLoot` = '0',
- `maxMoneyLoot` = '0',
- `flagsCustom` = '0',
- `VerifiedBuild` = '12340'
-WHERE
-	(`entry` = '701002');
+SET @ENTRY		 := 128; 	-- CREATURE_TEMPLATE ID
+SET @NAME_NPC    := 'Jeffery';
+SET @SOURCETYPE	 := 0; 		-- 0 = CREATURE
+SET @GOSSIP_MENU := 90010;  -- A few digits after the current max dialogue menu ID
+SET @TEXT_ID     := 100200; -- A few digits after the current max text ID
+SET @SSID		 := 140; 	-- SCRIPT ID
+SET @LINK		 := 0; 		-- LINKED SCRIPT (EXECUTES AFTER)
+SET @EVENTTYPE	 := 25; 	-- 25 = SMART_EVENT_RESET (After spawn, respawn, etc.)
+SET @ACTIONTYPE  := 41; 	-- 41 = SMART_ACTION_FORCE_DESPAWN
+SET @APARM1		 := 15000; 	-- Milliseconds until despawn occurs
+SET @TTYPE		 := 19;  	-- 19 - SMART_TARGET_CLOSEST_CREATURE
+SET @TPARM1		 := 128; 	-- SMART_TARGET CREATURE ID
+SET @NOTE		 := "Personal Teleporter Despawn";
+
+DELETE FROM `smart_scripts` WHERE (`entryorguid`=@ENTRY) AND (`source_type`=@SOURCETYPE) AND (`id` = @SSID);
+INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES
+(@ENTRY,@SOURCETYPE,@SSID,@LINK,@EVENTTYPE,0,100,0,0,0,0,0,@ACTIONTYPE,@APARM1,0,0,0,0,0,@TTYPE,@TPARM1,0,0,0.0,0.0,0.0,0.0,@NOTE);
 
 -- --------------------------------------------------------------------------------------
 -- Teleporter NPC
@@ -174,7 +46,7 @@ WHERE
 -- --------------------------------------------------------------------------------------
 DELETE FROM `creature_template` WHERE (`entry`=@ENTRY);
 INSERT INTO creature_template (`entry`, `name`, `subname`, `IconName`, `gossip_menu_id`, `minlevel`, `maxlevel`, `Healthmodifier`, `Manamodifier`, `Armormodifier`, `faction`, `npcflag`, `speed_walk`, `speed_run`, `scale`, `rank`, `damagemodifier`, `unit_class`, `unit_flags`, `type`, `type_flags`, `RegenHealth`, `flags_extra`, `AiName`) VALUES
-(@ENTRY, "Pocket Portal", "", 'Directions', 50000, 80, 83, 1.56, 1.56, 1.56, 35, 3, 1, 1.14286, @SCALE, 1, 1, 1, 2, 7, 138936390, 1, 2, 'SmartAI');
+(@ENTRY, @NAME_NPC, "", 'Directions', @GOSSIP_MENU, 80, 83, 1.56, 1.56, 1.56, 35, 3, 1, 1.14286, @SCALE, 1, 1, 1, 2, 7, 138936390, 1, 2, 'SmartAI');
 
 -- NPC MODEL
 DELETE FROM `creature_template_model` WHERE `CreatureID` = @Entry;
@@ -192,35 +64,71 @@ INSERT INTO `creature_template_movement` (`CreatureId`, `Ground`, `Swim`, `Fligh
 UPDATE creature_template SET AIName="SmartAI" WHERE entry=@ENTRY LIMIT 1;
 
 -- --------------------------------------------------------------------------------------
--- Give the creature a few items
+-- Gossip_Menus
+-- Insert into the database the gossip menus necessary for the NPC to speak.
 -- --------------------------------------------------------------------------------------
--- DELETE FROM `creature_equip_template` WHERE (`CreatureID`=@ENTRY);
--- INSERT INTO `creature_equip_template` (`CreatureID`,`ItemID1`,`ItemID2`,`ItemID3`) VALUES (@ENTRY,11855,5956,0);
+DELETE FROM `gossip_menu` WHERE `MenuID` BETWEEN @GOSSIP_MENU AND (@GOSSIP_MENU + 5);
 
--- --------------------------------------------------------------------------------------
--- Set Teleporter Despawn Time
--- --------------------------------------------------------------------------------------
-SET @ENTRY		:= 128; 	-- CREATURE_TEMPLATE ID
-SET @SOURCETYPE	        := 0; 		-- 0 = CREATURE
-SET @SSID		:= 140; 	-- SCRIPT ID
-SET @LINK		:= 0; 		-- LINKED SCRIPT (EXECUTES AFTER)
-SET @EVENTTYPE	        := 25; 		-- 25 = SMART_EVENT_RESET (After spawn, respawn, etc.)
-SET @ACTIONTYPE         := 41; 		-- 41 = SMART_ACTION_FORCE_DESPAWN
-SET @APARM1		:= 15000; 	-- Milliseconds until despawn occurs
-SET @TTYPE		:= 19;  	-- 19 - SMART_TARGET_CLOSEST_CREATURE
-SET @TPARM1		:= 128; 	-- SMART_TARGET CREATURE ID
-SET @NOTE		:= "Personal Teleporter Despawn";
+INSERT INTO `gossip_menu` (`MenuID`, `TextID`) VALUES
+(@GOSSIP_MENU, @TEXT_ID),
+(@GOSSIP_MENU, @TEXT_ID + 1),
+(@GOSSIP_MENU, @TEXT_ID + 2),
+(@GOSSIP_MENU, @TEXT_ID + 3),
+(@GOSSIP_MENU, @TEXT_ID + 4),
+(@GOSSIP_MENU, @TEXT_ID + 5);
+INSERT INTO `npc_text` (`ID`, `Text0_0`) VALUES
+(@TEXT_ID, 'Where would you like to go?'),
+(@TEXT_ID + 1, 'Take me to: '),
+(@TEXT_ID + 2, 'Take me to: '),
+(@TEXT_ID + 3, 'Take me to: '),
+(@TEXT_ID + 4, 'Take me to: '),
+(@TEXT_ID + 5, 'Take me to: ');
 
-DELETE FROM `smart_scripts` WHERE (`entryorguid`=@ENTRY) AND (`source_type`=@SOURCETYPE) AND (`id` = @SSID);
-INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES
-(@ENTRY,@SOURCETYPE,@SSID,@LINK,@EVENTTYPE,0,100,0,0,0,0,0,@ACTIONTYPE,@APARM1,0,0,0,0,0,@TTYPE,@TPARM1,0,0,0.0,0.0,0.0,0.0,@NOTE);
+
+INSERT INTO `gossip_menu` (`MenuID`, `TextID`) VALUES
+(@GOSSIP_MENU + 1, @TEXT_ID + 7),
+(@GOSSIP_MENU + 1, @TEXT_ID + 8),
+(@GOSSIP_MENU + 1, @TEXT_ID + 9),
+(@GOSSIP_MENU + 1, @TEXT_ID + 10),
+(@GOSSIP_MENU + 1, @TEXT_ID + 11),
+(@GOSSIP_MENU + 1, @TEXT_ID + 12);
+INSERT INTO `npc_text` (`ID`, `Text0_0`) VALUES
+(@TEXT_ID + 7, 'Where would you like to go?'),
+(@TEXT_ID + 8, 'Take me to: '),
+(@TEXT_ID + 9, 'Take me to: '),
+(@TEXT_ID + 10, 'Take me to: '),
+(@TEXT_ID + 11, 'Take me to: '),
+(@TEXT_ID + 12, 'Take me to: ');
+
+INSERT INTO `gossip_menu` (`MenuID`, `TextID`) VALUES
+(@GOSSIP_MENU + 2, @TEXT_ID + 13),
+(@GOSSIP_MENU + 2, @TEXT_ID + 14),
+(@GOSSIP_MENU + 2, @TEXT_ID + 15),
+(@GOSSIP_MENU + 2, @TEXT_ID + 16),
+(@GOSSIP_MENU + 2, @TEXT_ID + 17),
+(@GOSSIP_MENU + 2, @TEXT_ID + 18),
+(@GOSSIP_MENU + 2, @TEXT_ID + 19);
+INSERT INTO `npc_text` (`ID`, `Text0_0`) VALUES
+(@TEXT_ID + 13, 'Where would you like to go?'),
+(@TEXT_ID + 14, 'Take me to: '),
+(@TEXT_ID + 15, 'Take me to: '),
+(@TEXT_ID + 16, 'Take me to: '),
+(@TEXT_ID + 17, 'Take me to: '),
+(@TEXT_ID + 18, 'Take me to: '),
+(@TEXT_ID + 19, 'Take me to: ');
+
+INSERT INTO `gossip_menu` (`MenuID`, `TextID`) VALUES
+(@GOSSIP_MENU + 3, @TEXT_ID + 20);
+
+
+
 
 -- --------------------------------------------------------------------------------------
 -- Smart Scripts
 -- These mirror the same destinations as the StygianCore Portal Master
 -- --------------------------------------------------------------------------------------
 DELETE FROM `smart_scripts` WHERE (`entryorguid`=@ENTRY) AND (`source_type`=@SOURCETYPE) AND (`event_type`=62);
-INSERT INTO smart_scripts (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`, `target_type`, `target_param1`, `target_param2`, `target_param3`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES 
+INSERT INTO smart_scripts (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`, `target_type`, `target_param1`, `target_param2`, `target_param3`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES
 (@ENTRY, 0, 1, 0, 62, 0, 100, 0, @GOSSIP_MENU, 1, 0, 0, 62, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, -8842.09, 626.358, 94.0867, 3.61363, "Teleporter script"),
 (@ENTRY, 0, 2, 0, 62, 0, 100, 0, @GOSSIP_MENU, 2, 0, 0, 62, 1, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1601.08, -4378.69, 9.9846, 2.14362, "Teleporter script"),
 (@ENTRY, 0, 3, 0, 62, 0, 100, 0, @GOSSIP_MENU, 11, 0, 0, 62, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, -14281.9, 552.564, 8.90422, 0.860144, "Teleporter script"),
@@ -366,3 +274,4 @@ INSERT INTO smart_scripts (`entryorguid`, `source_type`, `id`, `link`, `event_ty
 (@ENTRY, 0, 137, 0, 62, 0, 100, 0, @GOSSIP_MENU+9, 5, 0, 0, 62, 1, 0, 0, 0, 0, 0, 7, 0, 0, 0, 7758.24, -2409.7, 489.282, 4.14574, "Gem Vendors Moonglade"),
 (@ENTRY, 0, 138, 0, 62, 0, 100, 0, @GOSSIP_MENU+9, 6, 0, 0, 62, 1, 0, 0, 0, 0, 0, 7, 0, 0, 0, -745.952, -989.286, 194.098, 2.01729, "Elise\'s Happy Place"),
 (@ENTRY, 0, 139, 0, 62, 0, 100, 0, @GOSSIP_MENU+9, 7, 0, 0, 62, 1, 0, 0, 0, 0, 0, 7, 0, 0, 0, 7443.72, -1690.19, 194.643, 5.49535, "Shatterspear Vale");
+
