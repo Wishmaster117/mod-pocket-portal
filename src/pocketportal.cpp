@@ -49,7 +49,7 @@ public:
             player->GetPositionY() + 1.5f,
             player->GetPositionZ(),
             player->GetOrientation(),
-            TEMPSUMMON_TIMED_DESPAWN, COOLDOWN_MS
+            TEMPSUMMON_TIMED_DESPAWN, 300000 //"COOLDOWN_MS" Temp CD will be the same as duration in release, but longer for testing replace 300000 with COOLDOWN_MS
         );
 
         lastUse = now;
