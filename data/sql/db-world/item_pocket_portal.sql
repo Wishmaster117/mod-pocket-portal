@@ -22,7 +22,6 @@ VALUES (@ITEMENTRY, 0, 0, @NAME, 28862, @QUALITY, @FLAGS, @FLAGSEXTRA, 1, 20000,
 
 SET @ENTRY       := 128;
 SET @NAME_NPC    := 'Jeffery';
-SET @SOURCETYPE  := 0;
 SET @GOSSIP_MENU := 92000;
 SET @ACTION_MENU := 1200000; -- Submenus
 SET @TEXT_ID     := 90000;
@@ -268,7 +267,7 @@ INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, Option
 -- Smart Scripts
 -- These mirror the same destinations as the StygianCore Portal Master
 -- --------------------------------------------------------------------------------------
-DELETE FROM `smart_scripts` WHERE (`entryorguid`=@ENTRY) AND (`source_type`=@SOURCETYPE) AND (`event_type`=62);
+DELETE FROM `smart_scripts` WHERE (`entryorguid`=@ENTRY) AND (`event_type`=62);
 INSERT INTO smart_scripts (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`, `target_type`, `target_param1`, `target_param2`, `target_param3`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES
 (@ENTRY, 0, 1, 0, 62, 0, 100, 0, @ACTION_MENU, 1, 0, 0, 62, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, -8842.09, 626.358, 94.0867, 3.61363, "Trade District - Stormwind City"),
 (@ENTRY, 0, 2, 0, 62, 0, 100, 0, @ACTION_MENU, 2, 0, 0, 62, 1, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1601.08, -4378.69, 9.9846, 2.14362, "Valley of Strength - Orgrimmar"),
@@ -399,7 +398,7 @@ INSERT INTO smart_scripts (`entryorguid`, `source_type`, `id`, `link`, `event_ty
 (@ENTRY, 0, 116, 0, 62, 0, 100, 0, @ACTION_MENU + 11, 10, 0, 0, 62, 530, 0, 0, 0, 0, 0, 7, 0, 0, 0, -220.297, 5378.58, 23.3223, 1.61718, "unknownDest"),
 
 
-(@ENTRY, 0, 117, 0, 62, 0, 100, 0, @ACTION_MENU + 12, 1, 0, 0, 0, -2266.23, 4244.73, 1.47728, 3.68426, "unknownDest"),
+(@ENTRY, 0, 117, 0, 62, 0, 100, 0, @ACTION_MENU + 12, 1, 0, 0, 0, 530, 0, 0, 0, 0, 0, 7, 0, 0, 0, -2266.23, 4244.73, 1.47728, 3.68426, "unknownDest"),
 (@ENTRY, 0, 118, 0, 62, 0, 100, 0, @ACTION_MENU + 12, 2, 0, 0, 62, 530, 0, 0, 0, 0, 0, 7, 0, 0, 0, -1610.85, 7733.62, -17.2773, 1.33522, "unknownDest"),
 (@ENTRY, 0, 119, 0, 62, 0, 100, 0, @ACTION_MENU + 12, 3, 0, 0, 62, 530, 0, 0, 0, 0, 0, 7, 0, 0, 0, 2029.75, 6232.07, 133.495, 1.30395, "unknownDest"),
 (@ENTRY, 0, 120, 0, 62, 0, 100, 0, @ACTION_MENU + 12, 4, 0, 0, 62, 530, 0, 0, 0, 0, 0, 7, 0, 0, 0, 3271.2, 3811.61, 143.153, 3.44101, "unknownDest"),
