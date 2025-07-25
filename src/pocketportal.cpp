@@ -34,7 +34,7 @@ public:
             return false;
         }
 
-        uint32 COOLDOWN_MS = 30 * IN_MILLISECONDS;
+        uint32 COOLDOWN_MS = 1 * IN_MILLISECONDS;
         uint64 now = GameTime::GetGameTimeMS().count();
 
         if (lastUse > 0 && now < lastUse + COOLDOWN_MS)
