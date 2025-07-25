@@ -2,16 +2,16 @@
 -- Pocket Portal
 -- --------------------------------------------------------------------------------------
 SET
-@ITEMENTRY 			:= 701002,
-@NAME				:= "Pocket Portal",
-@QUALITY			:= 7,
-@FLAGS				:= 134217728, -- BOA
-@FLAGSEXTRA			:= 0,
-@SOURCETYPE 		:= 0,
-@COOLDOWN			:= 30000,
-@SPELL              := 51371,
-@BUYPRICE           := 5000000,
-@SCRIPTNAME         := 'pocket_portal';
+@ITEMENTRY      := 701002,
+@NAME           := "Pocket Portal",
+@QUALITY        := 7,
+@FLAGS          := 134217728, -- BOA
+@FLAGSEXTRA     := 0,
+@SOURCETYPE     := 0,
+@COOLDOWN       := 30000,
+@SPELL          := 51371,
+@BUYPRICE       := 5000000,
+@SCRIPTNAME     := 'pocket_portal';
 
 -- --------------------------------------------------------------------------------------
 -- Teleporter Item
@@ -20,20 +20,21 @@ DELETE FROM `item_template` WHERE (`entry`= @ITEMENTRY);
 INSERT INTO `item_template` (`entry`, `class`, `subclass`, `name`, `displayid`, `Quality`, `Flags`, `FlagsExtra`, `BuyCount`, `BuyPrice`, `SellPrice`, `InventoryType`, `AllowableClass`, `AllowableRace`, `ItemLevel`, `RequiredLevel`, `RequiredSkill`, `RequiredSkillRank`, `requiredspell`, `requiredhonorrank`, `RequiredCityRank`, `RequiredReputationFaction`, `RequiredReputationRank`, `maxcount`, `stackable`, `ContainerSlots`, `StatsCount`, `stat_type1`, `stat_value1`, `stat_type2`, `stat_value2`, `stat_type3`, `stat_value3`, `stat_type4`, `stat_value4`, `stat_type5`, `stat_value5`, `stat_type6`, `stat_value6`, `stat_type7`, `stat_value7`, `stat_type8`, `stat_value8`, `stat_type9`, `stat_value9`, `stat_type10`, `stat_value10`, `ScalingStatDistribution`, `ScalingStatValue`, `dmg_min1`, `dmg_max1`, `dmg_type1`, `dmg_min2`, `dmg_max2`, `dmg_type2`, `armor`, `holy_res`, `fire_res`, `nature_res`, `frost_res`, `shadow_res`, `arcane_res`, `delay`, `ammo_type`, `RangedModRange`, `spellid_1`, `spelltrigger_1`, `spellcharges_1`, `spellppmRate_1`, `spellcooldown_1`, `spellcategory_1`, `spellcategorycooldown_1`, `spellid_2`, `spelltrigger_2`, `spellcharges_2`, `spellppmRate_2`, `spellcooldown_2`, `spellcategory_2`, `spellcategorycooldown_2`, `spellid_3`, `spelltrigger_3`, `spellcharges_3`, `spellppmRate_3`, `spellcooldown_3`, `spellcategory_3`, `spellcategorycooldown_3`, `spellid_4`, `spelltrigger_4`, `spellcharges_4`, `spellppmRate_4`, `spellcooldown_4`, `spellcategory_4`, `spellcategorycooldown_4`, `spellid_5`, `spelltrigger_5`, `spellcharges_5`, `spellppmRate_5`, `spellcooldown_5`, `spellcategory_5`, `spellcategorycooldown_5`, `bonding`, `description`, `PageText`, `LanguageID`, `PageMaterial`, `startquest`, `lockid`, `Material`, `sheath`, `RandomProperty`, `RandomSuffix`, `block`, `itemset`, `MaxDurability`, `area`, `Map`, `BagFamily`, `TotemCategory`, `socketColor_1`, `socketContent_1`, `socketColor_2`, `socketContent_2`, `socketColor_3`, `socketContent_3`, `socketBonus`, `GemProperties`, `RequiredDisenchantSkill`, `ArmorDamageModifier`, `Duration`, `ItemLimitCategory`, `HolidayId`, `ScriptName`, `DisenchantID`, `FoodType`, `minMoneyLoot`, `maxMoneyLoot`, `VerifiedBuild`)
 VALUES (@ITEMENTRY, 0, 0, @NAME, 28862, @QUALITY, @FLAGS, @FLAGSEXTRA, 1, 20000, 10000, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, @SPELL, 0, 0, 0, @COOLDOWN, 1193, @COOLDOWN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, @SCRIPTNAME, 0, 0, 0, 0, 12340);
 
-SET @ENTRY		 := 128;
+SET @ENTRY       := 128;
 SET @NAME_NPC    := 'Jeffery';
-SET @SOURCETYPE	 := 0;
+SET @SOURCETYPE  := 0;
 SET @GOSSIP_MENU := 92000;
+SET @ACTION_MENU := 1200000; -- Submenus
 SET @TEXT_ID     := 90000;
-SET @SSID		 := 140;
-SET @LINK		 := 0;
-SET @SCALE		 := 0.8;
-SET @EVENTTYPE	 := 25; 	-- 25 = SMART_EVENT_RESET (After spawn, respawn, etc.)
-SET @ACTIONTYPE  := 41; 	-- 41 = SMART_ACTION_FORCE_DESPAWN
-SET @APARM1		 := 30000; 	-- Milliseconds until despawn occurs
-SET @TTYPE		 := 19;  	-- 19 - SMART_TARGET_CLOSEST_CREATURE
-SET @TPARM1		 := 128; 	-- SMART_TARGET CREATURE ID
-SET @NOTE		 := "Personal Teleporter";
+SET @SSID        := 140;
+SET @LINK        := 0;
+SET @SCALE       := 0.8;
+SET @EVENTTYPE   := 25;     -- 25 = SMART_EVENT_RESET (After spawn, respawn, etc.)
+SET @ACTIONTYPE  := 41;     -- 41 = SMART_ACTION_FORCE_DESPAWN
+SET @APARM1      := 30000;     -- Milliseconds until despawn occurs
+SET @TTYPE       := 19;      -- 19 - SMART_TARGET_CLOSEST_CREATURE
+SET @TPARM1      := 128;     -- SMART_TARGET CREATURE ID
+SET @NOTE        := "Personal Teleporter";
 
 -- --------------------------------------------------------------------------------------
 -- Teleporter NPC
@@ -70,7 +71,20 @@ UPDATE creature_template SET AIName="SmartAI" WHERE entry=@ENTRY LIMIT 1;
 DELETE FROM `gossip_menu` WHERE `MenuID` BETWEEN @GOSSIP_MENU AND (@GOSSIP_MENU + 5);
 DELETE FROM `gossip_menu_option` WHERE `MenuID` BETWEEN @GOSSIP_MENU AND (@GOSSIP_MENU + 5);
 
--- Options for the menu
+-- MAIN MENU (to be replaced with all submenus instead of destinations)
+INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag, ActionMenuID) VALUES
+(@GOSSIP_MENU - 1, 1, 0, 'Cities', 1, 1, @ACTION_MENU),
+(@GOSSIP_MENU - 1, 2, 0, 'Take me to: Orgrimmar', 1, @ACTION_MENU + 1),
+(@GOSSIP_MENU - 1, 3, 0, 'Take me to: Booty Bay', 1, @ACTION_MENU + 2),
+(@GOSSIP_MENU - 1, 4, 0, 'Take me to: Shattrath', 1, @ACTION_MENU + 3),
+(@GOSSIP_MENU - 1, 5, 0, 'Take me to: Dalaran', 1, @ACTION_MENU + 4),
+(@GOSSIP_MENU - 1, 5, 0, 'Take me to: Dalaran', 1, @ACTION_MENU + 5),
+(@GOSSIP_MENU - 1, 5, 0, 'Take me to: Dalaran', 1, @ACTION_MENU + 6),
+(@GOSSIP_MENU - 1, 5, 0, 'Take me to: Dalaran', 1, @ACTION_MENU + 7),
+(@GOSSIP_MENU - 1, 5, 0, 'Take me to: Dalaran', 1, @ACTION_MENU + 8),
+(@GOSSIP_MENU - 1, 5, 0, 'Take me to: Dalaran', 1, @ACTION_MENU + 9),
+(@GOSSIP_MENU - 1, 5, 0, 'Take me to: Dalaran', 1, @ACTION_MENU + 10);
+
 INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag) VALUES
 (@GOSSIP_MENU, 1, 0, 'Take me to: Stormwind City', 1, 1),
 (@GOSSIP_MENU, 2, 0, 'Take me to: Orgrimmar', 1, 1),
