@@ -47,8 +47,8 @@ public:
             NPC,
             player->GetPositionX() + 1.5f,
             player->GetPositionY() + 1.5f,
-            player->GetPositionZ(),
-            player->GetOrientation(),
+            player->GetPositionZ() + 2.0f,
+            player->GetOrientation() + 3.14f,
             TEMPSUMMON_TIMED_DESPAWN, 300000 //"COOLDOWN_MS" Temp CD will be the same as duration in release, but longer for testing replace 300000 with COOLDOWN_MS
         );
 

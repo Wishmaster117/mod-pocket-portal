@@ -1,0 +1,9 @@
+notepad
+
+
+MyNotepadDB = {
+	["cat 4"] = "1) Stonetalon Mountains - Sun Rock Retreat\n2) Fishing Resort\n3) The Barrens\n4) Secret Crypt\n5) Everlook\n6) Moonglade -- delete?\n7) Honor's Stand\n8) Party Trolls\n9) blank",
+	["cat 2"] = "1) Terokkar Forest\n2) Halaa\n3) Blade's Edge Mountains\n4) Area 52\n5) Shadowmoon Valley\n6) Borean Tundra\n7) Howling Fjord\n8) Dragonblight - Moa'ki Harbor\n9) Grizzly Hills\n10) Zul'Drak",
+	["cat 3"] = "1) Sholazar Basin - Nesingwary Base Camp\n2) Crystalsong Forest\n3) The Storm Peaks - K3\n4) Icecrown - The Shadow Vault\n5) Wintergrasp -- DELETE OP can use mid BG\n6) empty +++",
+	["cat 1"] = "1) Dustwallow Marsh\n2) Feralas\n3) Gadgetzan\n4) Azshara\n5) Felwood\n6) Un'Goro Crater\n7) Cenarion Hold\n8) Everlook\n9) Hellfire Peninsula\n10) Cenarion Refuge",
+}
