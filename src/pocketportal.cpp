@@ -34,7 +34,7 @@ public:
             return false;
         }
 
-        uint32 COOLDOWN_MS = 1 * IN_MILLISECONDS;
+        uint32 COOLDOWN_MS = 30 * IN_MILLISECONDS;
         uint64 now = GameTime::GetGameTimeMS().count();
 
         if (lastUse > 0 && now < lastUse + COOLDOWN_MS)
@@ -49,7 +49,7 @@ public:
             player->GetPositionY() + 1.5f,
             player->GetPositionZ() + 2.0f,
             player->GetOrientation() + 3.14f,
-            TEMPSUMMON_TIMED_DESPAWN, 300000 //"COOLDOWN_MS" Temp CD will be the same as duration in release, but longer for testing replace 300000 with COOLDOWN_MS
+            TEMPSUMMON_TIMED_DESPAWN, COOLDOWN_MS
         );
 
         lastUse = now;
