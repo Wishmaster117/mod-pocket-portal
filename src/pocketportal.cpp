@@ -25,6 +25,8 @@ public:
 
     bool OnUse(Player* player, Item* item, SpellCastTargets const& /*targets*/) override
     {
+        (void)item;
+
         if (!sConfigMgr->GetOption<bool>("PocketPortal.Enable", true))
             return false;
 
