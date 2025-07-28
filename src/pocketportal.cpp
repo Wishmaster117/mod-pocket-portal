@@ -55,6 +55,9 @@ public:
             player->GetOrientation(),
             TEMPSUMMON_TIMED_DESPAWN, COOLDOWN_MS
         );
+        if (npc) {
+            npc->SetFacingToObject(player);
+        }
 
         lastUse = now;
         return true;
