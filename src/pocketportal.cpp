@@ -7,6 +7,9 @@
 #include "Player.h"
 #include "ScriptMgr.h"
 #include "GameTime.h"
+#include "Creature.h"
+#include "Unit.h"
+#include "SharedDefines.h"
 
 enum NPC
 {
@@ -34,7 +37,8 @@ public:
             return false;
         }
 
-        uint32 COOLDOWN_MS = 30 * IN_MILLISECONDS;
+        const uint32 COOLDOWN_MS = sConfigMgr->GetOption<int32>("Portal.NpcDuration", 60) * IN_MILLISECONDS;
+
         uint64 now = GameTime::GetGameTimeMS().count();
 
         if (lastUse > 0 && now < lastUse + COOLDOWN_MS)
@@ -43,12 +47,12 @@ public:
                     player->SendSystemMessage("Pocket Portal is on cooldown. Try again in " + std::to_string(secondsLeft) + " seconds.");
                     return false;
                 }
-        player->SummonCreature(
+        Creature* npc = player->SummonCreature(
             NPC,
             player->GetPositionX() + 1.5f,
             player->GetPositionY() + 1.5f,
             player->GetPositionZ() + 2.0f,
-            player->GetOrientation() + 3.14f,
+            player->GetOrientation(),
             TEMPSUMMON_TIMED_DESPAWN, COOLDOWN_MS
         );
 
