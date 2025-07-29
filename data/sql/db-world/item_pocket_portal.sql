@@ -15,8 +15,8 @@ SET
 
 -- Add the item to Magical Goods Vendor in Dalaran
 -- https://www.wowhead.com/wotlk/npc=28715/endora-moorehead
-DELETE FROM npc_vendor WHERE entry = 28715 AND item = @ITEMENTRY;
-INSERT INTO npc_vendor (entry, slot, item, maxcount, incrtime, ExtendedCost, VerifiedBuild)
+DELETE FROM `npc_vendor` WHERE `entry` = 28715 AND `item` = @ITEMENTRY;
+INSERT INTO `npc_vendor` (`entry`, `slot`, `item`, `maxcount`, `incrtime`, `ExtendedCost`, `VerifiedBuild`)
 VALUES (28715, 0, @ITEMENTRY, 0, 0, 0, 0);
 
 -- --------------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ SET @NOTE        := "Personal Teleporter";
 --
 -- --------------------------------------------------------------------------------------
 DELETE FROM `creature_template` WHERE (`entry`=@ENTRY);
-INSERT INTO creature_template (`entry`, `name`, `subname`, `IconName`, `gossip_menu_id`, `minlevel`, `maxlevel`, `Healthmodifier`, `Manamodifier`, `Armormodifier`, `faction`, `npcflag`, `speed_walk`, `speed_run`, `scale`, `rank`, `damagemodifier`, `unit_class`, `unit_flags`, `type`, `type_flags`, `RegenHealth`, `flags_extra`, `AiName`) VALUES
+INSERT INTO `creature_template` (`entry`, `name`, `subname`, `IconName`, `gossip_menu_id`, `minlevel`, `maxlevel`, `Healthmodifier`, `Manamodifier`, `Armormodifier`, `faction`, `npcflag`, `speed_walk`, `speed_run`, `scale`, `rank`, `damagemodifier`, `unit_class`, `unit_flags`, `type`, `type_flags`, `RegenHealth`, `flags_extra`, `AiName`) VALUES
 (@ENTRY, @NAME_NPC, "", 'Directions', @GOSSIP_MENU, 60, 60, 1.56, 1.56, 1.56, 35, 3, 1, 1.14286, @SCALE, 1, 1, 1, 2, 7, 138936390, 1, 2, 'SmartAI');
 
 DELETE FROM `smart_scripts` WHERE (`entryorguid`=@ENTRY) AND (`source_type`=@SOURCETYPE) AND (`id` = @SSID);
@@ -67,7 +67,7 @@ INSERT INTO `creature_template_movement` (`CreatureId`, `Ground`, `Swim`, `Fligh
 -- --------------------------------------------------------------------------------------
 -- Update Creature SmartAI
 -- --------------------------------------------------------------------------------------
-UPDATE creature_template SET AIName="SmartAI" WHERE entry=@ENTRY LIMIT 1;
+UPDATE `creature_template` SET `AIName`="SmartAI" WHERE `entry`=@ENTRY LIMIT 1;
 -- --------------------------------------------------------------------------------------
 -- Gossip_Menus
 -- Insert into the database the gossip menus necessary for the NPC to speak.
@@ -78,7 +78,7 @@ DELETE FROM `gossip_menu_option` WHERE `MenuID` BETWEEN @GOSSIP_MENU AND (@GOSSI
 DELETE FROM `gossip_menu_option` WHERE `MenuID` BETWEEN @ACTION_MENU AND (@ACTION_MENU + 16);
 
 -- MAIN MENU
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag, ActionMenuID) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`, `ActionMenuID`) VALUES
 (@GOSSIP_MENU, 1, 0, 'Cities', 1, 1, @GOSSIP_MENU + 1),
 (@GOSSIP_MENU, 2, 0, 'Classic Dungeons 1', 1, 1, @ACTION_MENU + 3),
 (@GOSSIP_MENU, 3, 0, 'Classic Dungeons 2', 1, 1, @ACTION_MENU + 4),
@@ -89,13 +89,13 @@ INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, Option
 (@GOSSIP_MENU, 8, 0, 'Miscellaneous', 1, 1, @GOSSIP_MENU + 2);
 
 -- Cities Submenu
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag, ActionMenuID) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`, `ActionMenuID`) VALUES
 (@GOSSIP_MENU + 1, 1, 0, 'Alliance Cities', 1, 1, @ACTION_MENU + 0),
 (@GOSSIP_MENU + 1, 2, 0, 'Horde Cities', 1, 1, @ACTION_MENU + 1),
 (@GOSSIP_MENU + 1, 3, 0, 'Neutral Cities', 1, 1, @ACTION_MENU + 2);
 
 -- Misc Submenu
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag, ActionMenuID) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`, `ActionMenuID`) VALUES
 (@GOSSIP_MENU + 2, 1, 0, 'Alliance Townships', 1, 1, @ACTION_MENU + 9),
 (@GOSSIP_MENU + 2, 2, 0, 'Horde Townships', 1, 1, @ACTION_MENU + 10),
 (@GOSSIP_MENU + 2, 3, 0, 'Wilderness 1', 1, 1, @ACTION_MENU + 11),
@@ -107,14 +107,14 @@ INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, Option
 
 
 -- Alliance Cities Added + 0 for easier highlighting
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`) VALUES
 (@ACTION_MENU + 0, 1, 0, 'Take me to: Stormwind City', 1, 1),
 (@ACTION_MENU + 0, 2, 0, 'Take me to: Darnassus', 1, 1),
 (@ACTION_MENU + 0, 3, 0, 'Take me to: Ironforge', 1, 1),
 (@ACTION_MENU + 0, 4, 0, 'Take me to: The Exodar', 1, 1);
 
 -- Horde Cities
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`) VALUES
 (@ACTION_MENU + 1, 1, 0, 'Orgrimmar', 1, 1),
 (@ACTION_MENU + 1, 2, 0, 'Thunderbluff', 1, 1),
 (@ACTION_MENU + 1, 3, 0, 'Undercity', 1, 1),
@@ -122,7 +122,7 @@ INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, Option
 
 
 -- Neutral Zones
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`) VALUES
 (@ACTION_MENU + 2, 1, 0, 'Shattrath', 1, 1),
 (@ACTION_MENU + 2, 2, 0, 'Dalaran', 1, 1),
 (@ACTION_MENU + 2, 3, 0, 'Booty Bay', 1, 1),
@@ -131,7 +131,7 @@ INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, Option
 (@ACTION_MENU + 2, 6, 0, 'Area 52', 1, 1);
 
 -- Classic Dungeons 1
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`) VALUES
 (@ACTION_MENU + 3, 1, 0, 'Ragefire Chasm', 1, 1),
 (@ACTION_MENU + 3, 2, 0, 'The Deadmines', 1, 1),
 (@ACTION_MENU + 3, 3, 0, 'The Wailing Caverns', 1, 1),
@@ -144,7 +144,7 @@ INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, Option
 (@ACTION_MENU + 3, 10, 0, 'Razorfen Downs', 1, 1);
 
 -- Classic Dungeons 2
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`) VALUES
 (@ACTION_MENU + 4, 1, 0, 'Uldaman', 1, 1),
 (@ACTION_MENU + 4, 2, 0, "Zul'Farrak", 1, 1),
 (@ACTION_MENU + 4, 3, 0, 'Maraudon', 1, 1),
@@ -156,7 +156,7 @@ INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, Option
 (@ACTION_MENU + 4, 9, 0, 'Stratholme', 1, 1);
 
 -- TBC Dungeons
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`) VALUES
 (@ACTION_MENU + 5, 1, 0, 'Hellfire Citadel', 1, 1),
 (@ACTION_MENU + 5, 2, 0, 'Coilfang Reservoir', 1, 1),
 (@ACTION_MENU + 5, 3, 0, 'Auchindoun', 1, 1),
@@ -166,7 +166,7 @@ INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, Option
 (@ACTION_MENU + 5, 7, 0, "Magisters' Terrace", 1, 1);
 
 -- WOTLK Dungeons
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`) VALUES
 (@ACTION_MENU + 6, 1, 0, 'Utgarde Keep', 1, 1),
 (@ACTION_MENU + 6, 2, 0, 'The Nexus', 1, 1),
 (@ACTION_MENU + 6, 3, 0, 'The Pit of Narjun', 1, 1),
@@ -181,7 +181,7 @@ INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, Option
 (@ACTION_MENU + 6, 12, 0, 'The Frozen Halls', 1, 1);
 
 -- Raids 1
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`) VALUES
 (@ACTION_MENU + 7, 1, 0, 'Blackwing Lair', 1, 1),
 (@ACTION_MENU + 7, 2, 0, 'The Molten Core', 1, 1),
 (@ACTION_MENU + 7, 3, 0, "Zul'Gurub", 1, 1),
@@ -194,7 +194,7 @@ INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, Option
 (@ACTION_MENU + 7, 10, 0, 'Hyjal Summit', 1, 1);
 
 -- Raids 2
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`) VALUES
 (@ACTION_MENU + 8, 1, 0, "Magtheridon's Lair", 1, 1),
 (@ACTION_MENU + 8, 2, 0, "Gruul's Lair", 1, 1),
 (@ACTION_MENU + 8, 3, 0, "Zul'Aman", 1, 1),
@@ -209,7 +209,7 @@ INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, Option
 (@ACTION_MENU + 8, 12, 0, 'Icecrown Citadel', 1, 1);
 
 -- Alliance Townships
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`) VALUES
 (@ACTION_MENU + 9, 1, 0, 'Goldshire', 1, 1),
 (@ACTION_MENU + 9, 2, 0, 'Kharanos', 1, 1),
 (@ACTION_MENU + 9, 3, 0, 'Sentinel Hill', 1, 1),
@@ -220,7 +220,7 @@ INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, Option
 (@ACTION_MENU + 9, 8, 0, "The Isle of Quel'Danas", 1, 1);
 
 -- Horde Townships
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`) VALUES
 (@ACTION_MENU + 10, 1, 0, 'Razor Hill', 1, 1),
 (@ACTION_MENU + 10, 2, 0, 'Brill', 1, 1),
 (@ACTION_MENU + 10, 3, 0, 'Tranquillien', 1, 1),
@@ -230,7 +230,7 @@ INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, Option
 (@ACTION_MENU + 10, 7, 0, "The Isle of Quel'Danas", 1, 1);
 
 -- Wilderness 1
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`) VALUES
 (@ACTION_MENU + 11, 1, 0, 'Silverpine Forest', 1, 1),
 (@ACTION_MENU + 11, 2, 0, 'Azuremyst Isle', 1, 1),
 (@ACTION_MENU + 11, 3, 0, 'Loch Modan', 1, 1),
@@ -245,7 +245,7 @@ INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, Option
 (@ACTION_MENU + 11, 12, 0, 'The Hinterlands', 1, 1);
 
 -- Wilderness 2
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`) VALUES
 (@ACTION_MENU + 12, 1, 0, 'Ashenvale', 1, 1),
 (@ACTION_MENU + 12, 2, 0, 'Stonetalon Mountains', 1, 1),
 (@ACTION_MENU + 12, 3, 0, 'Thousand Needles', 1, 1),
@@ -256,7 +256,7 @@ INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, Option
 (@ACTION_MENU + 12, 8, 0, 'Western Plaguelands', 1, 1);
 
 -- Wilderness 3
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`) VALUES
 (@ACTION_MENU + 13, 1, 0, "Light's Hope Chapel", 1, 1),
 (@ACTION_MENU + 13, 2, 0, 'Gurubashi Arena', 1, 1),
 (@ACTION_MENU + 13, 3, 0, 'Dustwallow Marsh', 1, 1),
@@ -267,7 +267,7 @@ INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, Option
 (@ACTION_MENU + 13, 8, 0, 'Cenarion Hold', 1, 1);
 
 -- Outland Wilderness
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`) VALUES
 (@ACTION_MENU + 14, 1, 0, 'Hellfire Peninsula', 1, 1),
 (@ACTION_MENU + 14, 2, 0, 'Cenarion Refuge', 1, 1),
 (@ACTION_MENU + 14, 3, 0, 'Terokkar Forest', 1, 1),
@@ -276,7 +276,7 @@ INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, Option
 (@ACTION_MENU + 14, 6, 0, 'Shadowmoon Valley', 1, 1);
 
 -- Northrend Wilderness
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`) VALUES
 (@ACTION_MENU + 15, 1, 0, 'Borean Tundra', 1, 1),
 (@ACTION_MENU + 15, 2, 0, 'Howling Fjord', 1, 1),
 (@ACTION_MENU + 15, 3, 0, "Dragonblight - Moa'ki Harbor", 1, 1),
@@ -288,7 +288,7 @@ INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, Option
 (@ACTION_MENU + 15, 9, 0, 'Icecrown - The Shadow Vault', 1, 1);
 
 -- Tamed Wilderness
-INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, OptionType, OptionNpcFlag) VALUES
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionType`, `OptionNpcFlag`) VALUES
 (@ACTION_MENU + 16, 1, 0, 'Sunrock Retreat', 1, 1),
 (@ACTION_MENU + 16, 2, 0, 'Fishing Resort', 1, 1),
 (@ACTION_MENU + 16, 3, 0, "Koiter's Shrine", 1, 1),
@@ -302,7 +302,7 @@ INSERT INTO gossip_menu_option (MenuID, OptionID, OptionIcon, OptionText, Option
 -- Accepting PR to anyone who wants to move the smartscript IDs so they're in order from 1-x.
 -- --------------------------------------------------------------------------------------
 DELETE FROM `smart_scripts` WHERE (`entryorguid`=@ENTRY) AND (`event_type`=62);
-INSERT INTO smart_scripts (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`, `target_type`, `target_param1`, `target_param2`, `target_param3`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES
+INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`, `target_type`, `target_param1`, `target_param2`, `target_param3`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES
 (@ENTRY, 0, 1, 0, 62, 0, 100, 0, @ACTION_MENU + 0, 1, 0, 0, 62, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, -8842.09, 626.358, 94.0867, 3.61363, "Stormwind City"),
 (@ENTRY, 0, 7, 0, 62, 0, 100, 0, @ACTION_MENU + 0, 2, 0, 0, 62, 1, 0, 0, 0, 0, 0, 7, 0, 0, 0, 9869.91, 2493.58, 1315.88, 2.78897, "Darnassus"),
 (@ENTRY, 0, 8, 0, 62, 0, 100, 0, @ACTION_MENU + 0, 3, 0, 0, 62, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, -4900.47, -962.585, 501.455, 5.40538, "Ironforge"),
