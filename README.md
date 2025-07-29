@@ -4,17 +4,18 @@
 
 ## Description
 
-Stygiancore Pocket Portal with anti-exploit script to stop it being used in BG , Arena , Combat and other exploitable scenarios.
+Stygiancore Pocket Portal with anti-exploit script to stop it being used in BG, Arena, Combat, and other exploitable scenarios.
 
-
+Updated to create a dialog system to teleport the player to the desired location.
+The item can now be purchased from the vendor endora moorehead in the magical goods shop in Dalaran.
+Now with more apples.
 ## Installation
 
 ```
-1. Simply place the module under the `modules` directory of your AzerothCore source. 
-2. Import the SQL useing Azerothcore db_assembler or manually to the right Database (world).
-3. Re-run cmake and launch a clean build of AzerothCore.
-4. Copy pocketportal.conf.dist to pocketportal.conf 
-5. Launch worldserver
+1. Simply place the module under the `modules` directory of your AzerothCore source.
+2. Re-run cmake and launch a clean build of AzerothCore.
+3. Copy pocketportal.conf.dist to pocketportal.conf
+4. Launch worldserver
 ```
 
 
