@@ -8,7 +8,6 @@
 #                     0  - (Disabled)
 PocketPortal.Enable = 1
 
-
 #
 #   Portal.NpcDuration
 #       Description: Time (in seconds) before despawn of summoned NPC

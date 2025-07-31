@@ -40,10 +40,10 @@ public:
 
         uint64 now = GameTime::GetGameTimeMS().count();
 
-        if (m_lastUse > 0 && now < m_lastUse + COOLDOWN_MS)
+        if (_lastUse > 0 && now < _lastUse + COOLDOWN_MS)
                 {
-                    uint32 secondsLeft = (m_lastUse + COOLDOWN_MS - now) / IN_MILLISECONDS;
-                    player->SendSystemMessage("Pocket Portal is on cooldown. Try again in " + std::to_string(secondsLeft) + " seconds.");
+                    uint32 secondsLeft = (_lastUse + COOLDOWN_MS - now) / IN_MILLISECONDS;
+                    player->SendSystemMessage(std::format("Pocket Portal is on cooldown. Try again in {} seconds.", secondsLeft));
                     return false;
                 }
         Creature* npc = player->SummonCreature(
@@ -54,16 +54,17 @@ public:
             player->GetOrientation(),
             TEMPSUMMON_TIMED_DESPAWN, COOLDOWN_MS
         );
-        if (npc) {
+        if (npc)
+        {
             npc->SetFacingToObject(player);
             npc->HandleEmoteCommand(EMOTE_DANCE); // Doesn't work :(
         }
 
-        m_lastUse = now;
+        _lastUse = now;
         return true;
     }
 private:
-    uint64 m_lastUse = 0;
+    uint64 _lastUse = 0;
 };
 
 void AddSC_pocket_portal()
