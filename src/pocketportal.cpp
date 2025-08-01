@@ -7,9 +7,9 @@
 #include "Item.h"
 #include "Map.h"
 #include "Player.h"
-#include "Unit.h"
 #include "ScriptMgr.h"
 #include "SharedDefines.h"
+#include "Unit.h"
 
 enum PocketPortalNPC
 {
@@ -36,7 +36,7 @@ public:
             return false;
         }
 
-        uint32 const COOLDOWN_MS = sConfigMgr->GetOption<int32>("Portal.NpcDuration", 60) * IN_MILLISECONDS;
+        uint32 const COOLDOWN_MS = sConfigMgr->GetOption<int32>("Portal.NpcDuration", 30) * IN_MILLISECONDS;
 
         uint64 now = GameTime::GetGameTimeMS().count();
 
