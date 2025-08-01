@@ -1,21 +1,20 @@
 /* Credits: Micrah/Milestorme Module creator */
 
 #include "Battleground.h"
-#include "BattlegroundMgr.h"
-#include "Configuration/Config.h"
-#include "Define.h"
-#include "GossipDef.h"
+#include "Config.h"
+#include "Creature.h"
+#include "GameTime.h"
 #include "Item.h"
 #include "Map.h"
 #include "Player.h"
-#include "ScriptedGossip.h"
 #include "ScriptMgr.h"
-#include "Spell.h"
+#include "SharedDefines.h"
+#include "Unit.h"
 
-enum Vendors
+enum PocketPortalNPC
 {
-    NPC_VENDOR_A    = 128,
-    NPC_VENDOR_H    = 128,
+    NPC_POCKET_PORTAL = 128,
+    EMOTE_DANCE = 10
 };
 
 class pocket_portal : public ItemScript
@@ -23,72 +22,53 @@ class pocket_portal : public ItemScript
 public:
     pocket_portal() : ItemScript("pocket_portal") { }
 
-    bool OnUse(Player* player, Item* item, SpellCastTargets const& /*targets*/) override
+    bool OnUse(Player* player, Item* /*item*/, SpellCastTargets const& /*targets*/) override
     {
         if (!sConfigMgr->GetOption<bool>("PocketPortal.Enable", true))
             return false;
 
-        if (player->duel || player->GetMap()->IsBattleArena() || player->InBattleground() || player->HasFlag(UNIT_FIELD_FLAGS_2, UNIT_FLAG2_FEIGN_DEATH) || player->isDead()|| player->IsInCombat() || player->IsInFlight() || player->HasStealthAura() || player->HasInvisibilityAura())
+        if (player->duel || player->GetMap()->IsBattleArena() || player->InBattleground() ||
+            player->HasFlag(UNIT_FIELD_FLAGS_2, UNIT_FLAG2_FEIGN_DEATH) || player->isDead() ||
+            player->IsInCombat() || player->IsInFlight() ||
+            player->HasStealthAura() || player->HasInvisibilityAura())
+        {
+            player->SendSystemMessage("You can't use the Pocket Portal right now.");
             return false;
-
-        player->PlayerTalkClass->ClearMenus();
-
-        if (sConfigMgr->GetOption<bool>("PocketPortal.Enable", true))
-        {
-            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Pocket Portal", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
-            SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, item->GetGUID());
         }
-        return false; // Cast the spell on use normally
-    }
 
-    void OnGossipSelect(Player* player, Item* /*item*/, uint32 /*sender*/, uint32 action) override
-    {
-        switch (action)
+        uint32 const COOLDOWN_MS = sConfigMgr->GetOption<int32>("Portal.NpcDuration", 30) * IN_MILLISECONDS;
+
+        uint64 now = GameTime::GetGameTimeMS().count();
+
+        if (_lastUse > 0 && now < _lastUse + COOLDOWN_MS)
+                {
+                    uint32 secondsLeft = (_lastUse + COOLDOWN_MS - now) / IN_MILLISECONDS;
+                    player->SendSystemMessage(std::format("Pocket Portal is on cooldown. Try again in {} seconds.", secondsLeft));
+                    return false;
+                }
+        Creature* npc = player->SummonCreature(
+            NPC_POCKET_PORTAL,
+            player->GetPositionX() + 1.5f,
+            player->GetPositionY() + 1.5f,
+            player->GetPositionZ() + 0.15f,
+            player->GetOrientation(),
+            TEMPSUMMON_TIMED_DESPAWN, COOLDOWN_MS
+        );
+        if (npc)
         {
-             case GOSSIP_ACTION_INFO_DEF + 1: /*portal*/
-            {
-                uint32 vendorId = 0;
-                std::string salute;
-                if (player->GetTeamId() == TEAM_ALLIANCE)
-                {
-                    vendorId = NPC_VENDOR_A;
-                    salute = "Greetings";
-                }
-                else
-                {
-                    vendorId = NPC_VENDOR_H;
-                    salute = "Zug zug";
-                }
+            npc->SetFacingToObject(player);
+            npc->HandleEmoteCommand(EMOTE_DANCE); // Doesn't work :(
+        }
 
-                SummonTempNPC(player, vendorId, salute.c_str());
-                CloseGossipMenuFor(player);
-                break;
-            }
-
-		}
+        _lastUse = now;
+        return true;
     }
-
-
-    void SummonTempNPC(Player* player, uint32 entry, const char* salute = "")
-    {
-        if (!player || entry == 0)
-            return;
-
-        int npcDuration = sConfigMgr->GetOption<int32>("Portal.NpcDuration", 60) * IN_MILLISECONDS;
-        if (npcDuration <= 0) // Safeguard
-            npcDuration = 60;
-
-        Creature* npc = player->SummonCreature(entry, player->GetPositionX(), player->GetPositionY(), player->GetPositionZ(), 0, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, npcDuration);
-        npc->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
-        npc->GetMotionMaster()->MoveFollow(player, PET_FOLLOW_DIST, player->GetFollowAngle());
-        npc->SetFaction(player->GetFaction());
-
-		if (salute && !(salute[0] == '\0'))
-            npc->TextEmote(salute, player, false);
-    }
+private:
+    uint64 _lastUse = 0;
 };
 
 void AddSC_pocket_portal()
 {
     new pocket_portal();
 }
+
